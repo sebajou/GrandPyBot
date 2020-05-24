@@ -1,0 +1,35 @@
+
+
+h1, h1 + p
+{
+    text-align: center;
+    margin-right: 10%;
+}
+
+img
+{
+    float: right;
+    border: 1px solid black;
+    box-shadow: 2px 2px 2px black;
+}
+
+h2
+{
+    color: #6E4A46;
+    margin-right: 10%;
+}
+
+section
+{
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 2%;
+}
+
+footer
+{
+    position: absolute;
+    left: 150px;
+    text-align: center;
+    bottom: 0px;
+}
