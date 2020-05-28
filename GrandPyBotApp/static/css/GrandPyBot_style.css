@@ -1,0 +1,38 @@
+
+
+h1, h1 + p, h2
+{
+    text-align: center;
+    margin-right: 10%;
+}
+
+img
+{
+    float: right;
+}
+
+h2
+{
+    color: #6E4A46;
+}
+
+h3
+{
+    position: absolute;
+    left: 50px;
+}
+
+section
+{
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 2%;
+}
+
+footer
+{
+    text-align: center;
+    left: 150px;
+    position: absolute;
+    bottom: 0px;
+}
