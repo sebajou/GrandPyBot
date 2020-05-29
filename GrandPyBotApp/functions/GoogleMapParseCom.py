@@ -1,8 +1,9 @@
 import string
 import re
+import requests
 
 
-class GoogleMapParseCom:
+class TheGoogleMapParseCom:
     """ This class parse message from front input from user and return it to the Google Map API"""
 
     def parse_message_from_front(message_from_front):
@@ -148,4 +149,5 @@ class GoogleMapParseCom:
         return message_to_api
 
     def send_message_to_api(self, message_to_api):
-        pass
+        req = requests.get('https://maps.googleapis.com/maps/api/staticmap?center={message_to_api},CA&zoom=14&size=400x400&key=AIzaSyCHOqWIkE8m-SalgGJkCDPNZ8KhaxZt-A8')
+        return req
