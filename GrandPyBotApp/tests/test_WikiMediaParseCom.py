@@ -1,9 +1,6 @@
-import GrandPyBotApp.functions.GoogleMapParseCom as script
+import GrandPyBotApp.functions.WikiMediaParseCom as script
 import requests
 import pytest
-from GrandPyBotApp import app
-
-GOOGLE_MAP_API_KEY = app.config['GOOGLE_MAP_API_KEY']
 
 
 class TestParse:
@@ -35,16 +32,16 @@ class TestParse:
         message_to_parse8 = self.sentence_to_parse8
         message_to_parse9 = self.sentence_to_parse9
         # Control that word in message_to_parse are present in a given list
-        assert [word for word in script.TheGoogleMapParseCom.parse_message_from_front(message_to_parse1) if word in ["openclassrooms"]]
-        assert [word for word in script.TheGoogleMapParseCom.parse_message_from_front(message_to_parse2) if word in ["gare", "lyon", "paris"]]
-        assert [word for word in script.TheGoogleMapParseCom.parse_message_from_front(message_to_parse3) if word in ["vieux", "port", "marseille"]]
-        assert [word for word in script.TheGoogleMapParseCom.parse_message_from_front(message_to_parse4) if word in ["venise"]]
-        assert [word for word in script.TheGoogleMapParseCom.parse_message_from_front(message_to_parse5) if word in ["antilles"]]
-        assert [word for word in script.TheGoogleMapParseCom.parse_message_from_front(message_to_parse6) if word in ["tunisie"]]
-        assert [word for word in script.TheGoogleMapParseCom.parse_message_from_front(message_to_parse7) if word in ["hong-kong"]]
-        assert [word for word in script.TheGoogleMapParseCom.parse_message_from_front(message_to_parse8) if word in ["barbade"]]
-        assert [word for word in script.TheGoogleMapParseCom.parse_message_from_front(message_to_parse9) if word in ["timor", "oriental"]]
+        assert [word for word in script.TheWikiMediaParseCom.parse_message_from_front(message_to_parse1) if word in ["openclassrooms"]]
+        assert [word for word in script.TheWikiMediaParseCom.parse_message_from_front(message_to_parse2) if word in ["gare", "lyon", "paris"]]
+        assert [word for word in script.TheWikiMediaParseCom.parse_message_from_front(message_to_parse3) if word in ["vieux", "port", "marseille"]]
+        assert [word for word in script.TheWikiMediaParseCom.parse_message_from_front(message_to_parse4) if word in ["venise"]]
+        assert [word for word in script.TheWikiMediaParseCom.parse_message_from_front(message_to_parse5) if word in ["antilles"]]
+        assert [word for word in script.TheWikiMediaParseCom.parse_message_from_front(message_to_parse6) if word in ["tunisie"]]
+        assert [word for word in script.TheWikiMediaParseCom.parse_message_from_front(message_to_parse7) if word in ["hong-kong"]]
+        assert [word for word in script.TheWikiMediaParseCom.parse_message_from_front(message_to_parse8) if word in ["barbade"]]
+        assert [word for word in script.TheWikiMediaParseCom.parse_message_from_front(message_to_parse9) if word in ["timor", "oriental"]]
 
     def test_send_message_to_api(self):
         to_api_request_localisation = self.api_request_localisation
-        assert script.TheGoogleMapParseCom.send_message_to_api(to_api_request_localisation).status_code == 200
+        assert script.TheWikiMediaParseCom.send_message_to_api(to_api_request_localisation).status_code == 200
