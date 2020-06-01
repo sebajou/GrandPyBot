@@ -22,7 +22,7 @@ Parser for Media Wiki with Python back end.
 Speak with Media Wiki API with Python back end and Json message.
 
 ### Randomly sentence send
-#### => Class RandomSentence
+#### => Class RandomMessage
 Engine to randomly send sentence from GranPapy with Python back end.
 
 ### Json from API parser

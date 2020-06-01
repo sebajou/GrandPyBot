@@ -44,4 +44,4 @@ class TestParse:
 
     def test_send_message_to_api(self):
         to_api_request_localisation = self.api_request_localisation
-        assert script.TheWikiMediaParseCom.send_message_to_api(to_api_request_localisation).status_code == 200
+        assert script.TheWikiMediaParseCom.get_message_from_api(to_api_request_localisation).status_code == 200
