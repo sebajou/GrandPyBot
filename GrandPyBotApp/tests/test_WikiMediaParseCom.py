@@ -1,6 +1,4 @@
 import GrandPyBotApp.functions.WikiMediaParseCom as script
-import requests
-import pytest
 
 
 class TestParse:

@@ -24,6 +24,10 @@ class TestParse:
         # For verify the good shape of message send for API request
         self.api_request_localisation = "pralognan"
 
+        # For test coordinate get
+        self.titles = "Pralognan-la-Vanoise"
+        self.coordinates = "45.3825, 6.72222222"
+
     def test_parse_message_from_front(self):
         message_to_parse1 = self.sentence_to_parse1
         message_to_parse2 = self.sentence_to_parse2
@@ -45,6 +49,12 @@ class TestParse:
         assert [word for word in parse.parse_message_from_front(message_from_front=message_to_parse7) if word in ["hong-kong"]]
         assert [word for word in parse.parse_message_from_front(message_from_front=message_to_parse8) if word in ["barbade"]]
         assert [word for word in parse.parse_message_from_front(message_from_front=message_to_parse9) if word in ["timor", "oriental"]]
+
+    def test_get_coordinates_from_api(self):
+        # Mock get_coordinates_from_api
+        parse = script.TheGoogleMapParseCom()
+        assert parse.parse_coordinates_from_api(self.titles) == self.coordinates
+
 
 
 
