@@ -22,6 +22,7 @@ class TestParse:
         self.api_request_localisation = "pralognan"
 
     def test_parse_message_from_front(self):
+        # Also test limit : none, only stop word, blank string ...
         message_to_parse1 = self.sentence_to_parse1
         message_to_parse2 = self.sentence_to_parse2
         message_to_parse3 = self.sentence_to_parse3
@@ -43,7 +44,3 @@ class TestParse:
         assert [word for word in parse.parse_message_from_front(message_from_front=message_to_parse8) if word in ["barbade"]]
         assert [word for word in parse.parse_message_from_front(message_from_front=message_to_parse9) if word in ["timor", "oriental"]]
 
-    """def test_send_message_to_api(self):
-        to_api_request_localisation = self.api_request_localisation
-        assert script.TheWikiMediaParseCom.get_message_from_api(to_api_request_localisation).status_code == 200
-"""

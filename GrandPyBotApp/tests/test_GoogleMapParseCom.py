@@ -46,7 +46,5 @@ class TestParse:
         assert [word for word in parse.parse_message_from_front(message_from_front=message_to_parse8) if word in ["barbade"]]
         assert [word for word in parse.parse_message_from_front(message_from_front=message_to_parse9) if word in ["timor", "oriental"]]
 
-    """def test_send_message_to_api(self):
-        to_api_request_localisation = self.api_request_localisation
-        assert script.TheGoogleMapParseCom.send_message_to_api(to_api_request_localisation).status_code == 200
-"""
+
+
