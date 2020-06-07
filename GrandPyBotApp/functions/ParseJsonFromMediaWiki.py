@@ -20,6 +20,16 @@ class ParseJson:
 
         return string_snippet
 
-    def json_extract(self, media_wiki_request_extract_result):
+    @staticmethod
+    def json_extract(media_wiki_request_extract_result):
         # Loop in Wiki media API json results from request for extract text Wiki.
-        pass
+        media_wiki_request_extract_result = json.loads(media_wiki_request_extract_result.read().decode("utf8"))
+        # Loop in Wiki media API json results from request for title.
+        for json_content in media_wiki_request_extract_result["query"]['pages']:
+            for json_content2 in media_wiki_request_extract_result["query"]['pages'][json_content]:
+                if json_content2 == 'extract':
+                    json_content3 = media_wiki_request_extract_result["query"]['pages'][json_content][json_content2]
+
+        string_extract = json_content3
+
+        return string_extract
