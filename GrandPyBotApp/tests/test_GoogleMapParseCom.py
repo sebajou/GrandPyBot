@@ -2,6 +2,7 @@ import GrandPyBotApp.functions.GoogleMapParseCom as script
 import requests
 import pytest
 from GrandPyBotApp import app
+import json
 
 GOOGLE_MAP_API_KEY = app.config['GOOGLE_MAP_API_KEY']
 
@@ -50,10 +51,27 @@ class TestParse:
         assert [word for word in parse.parse_message_from_front(message_from_front=message_to_parse8) if word in ["barbade"]]
         assert [word for word in parse.parse_message_from_front(message_from_front=message_to_parse9) if word in ["timor", "oriental"]]
 
-    def test_get_coordinates_from_api(self):
+    def test_get_coordinates_from_api(self, monkeypatch):
         # Mock get_coordinates_from_api
+        media_wiki_request_coordinates_result = {"batchcomplete":"","query":{"pages":{"586449":{"pageid":586449,"ns":0,"title":"Pralognan-la-Vanoise","coordinates":[{"lat":45.3825,"lon":6.72222222,"primary":"","globe":"earth"}]}}}}
+
+        class MockCoordinatesResponse:
+            def read(self):
+                results_string = json.dumps(media_wiki_request_coordinates_result)
+                results_bytes = results_string.encode()
+                return results_bytes
+
+        def mock_json_coordinate_from_wiki_api(media_wiki_request_coordinates_result):
+            response = MockCoordinatesResponse()
+            return response
+
+        monkeypatch.setattr('GrandPyBotApp.functions.GoogleMapParseCom.TheGoogleMapParseCom.get_coordinates_from_api',
+                            mock_json_coordinate_from_wiki_api)
+
+        response = mock_json_coordinate_from_wiki_api(media_wiki_request_coordinates_result)
+
         parse = script.TheGoogleMapParseCom()
-        assert parse.parse_coordinates_from_api(self.titles) == self.coordinates
+        assert parse.parse_coordinates_from_api(data_coordinates=response) == self.coordinates
 
 
 

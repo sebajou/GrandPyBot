@@ -1,5 +1,6 @@
 import requests
 from GrandPyBotApp.functions.Parse import Parser
+import json
 
 
 class TheWikiMediaParseCom(Parser):
@@ -39,3 +40,27 @@ class TheWikiMediaParseCom(Parser):
         extract = r.json()
 
         return extract
+
+    @staticmethod
+    def json_title(media_wiki_request_search_result):
+        # Load media_wiki_request_search_result in a subscriptable objet: a json
+        chaine_bytes = media_wiki_request_search_result.read()
+        chaine = chaine_bytes.decode("utf8")
+        data = json.loads(chaine)
+        # Wiki media API json results from request for title.
+        return_results = data['query']['search'][0]['title']
+        return return_results
+
+    @staticmethod
+    def json_extract(media_wiki_request_extract_result):
+        # Loop in Wiki media API json results from request for extract text Wiki.
+        media_wiki_request_extract_result = json.loads(media_wiki_request_extract_result.read().decode("utf8"))
+        # Loop in Wiki media API json results from request for title.
+        for json_content in media_wiki_request_extract_result["query"]['pages']:
+            for json_content2 in media_wiki_request_extract_result["query"]['pages'][json_content]:
+                if json_content2 == 'extract':
+                    json_content3 = media_wiki_request_extract_result["query"]['pages'][json_content][json_content2]
+
+        string_extract = json_content3
+
+        return string_extract

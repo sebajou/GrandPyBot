@@ -3,6 +3,7 @@ from GrandPyBotApp.functions.Parse import Parser
 from GrandPyBotApp import app
 from PIL import Image
 from io import BytesIO
+import json
 
 GOOGLE_MAP_API_KEY = app.config['GOOGLE_MAP_API_KEY']
 
@@ -18,6 +19,7 @@ class TheGoogleMapParseCom(Parser):
     # => https://maps.googleapis.com/maps/api/staticmap?center=43.294, 5.37&zoom=12&size=400x400&key=GOOGLE_MAP_API_KEY
 
     def get_coordinates_from_api(self, title):
+        """This function interogate the API Wiki Media to obtain coordinate from a title from an another function"""
         URL = "https://fr.wikipedia.org/w/api.php"
         TITLES = title
         PARAMS = {
@@ -29,10 +31,30 @@ class TheGoogleMapParseCom(Parser):
         data_coordinates = requests.get(url=URL, params=PARAMS)
         return data_coordinates
 
-    def parse_coordinates_from_api(self, data_coordinates):
-        pass
+    @staticmethod
+    def parse_coordinates_from_api(data_coordinates):
+        """ Extract coordinate from Wiki Media API json and put it in a string"""
+        # Loop in Wiki media API json results from request for obtain coordinates.
+        data_coordinates = json.loads(data_coordinates.read().decode("utf8"))
+
+        # Loop in Wiki media API json results from request for title.
+
+        for json_content in data_coordinates["query"]['pages']:
+            for json_content2 in data_coordinates["query"]['pages'][json_content]['coordinates'][0]:
+                if json_content2 == 'lat':
+                    string_coordinates_lat = data_coordinates["query"]['pages'][json_content]['coordinates'][0]['lat']
+                if json_content2 == 'lat':
+                    string_coordinates_lon = data_coordinates["query"]['pages'][json_content]['coordinates'][0]['lon']
+
+        string_coordinates_lat = str(string_coordinates_lat)
+        string_coordinates_lon = str(string_coordinates_lon)
+
+        string_coordinates = string_coordinates_lat + ', ' + string_coordinates_lon
+
+        return string_coordinates
 
     def get_image_from_api(self, coordinates, title):
+        """ Function for interogate Google Map API with coordinates to obtain a static map. """
         URL = "https://maps.googleapis.com/maps/api/staticmap"
         COORDINATES = coordinates
         PARAMS = {
