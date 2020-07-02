@@ -17,6 +17,10 @@ class TestParse:
         self.sentence_to_parse8 = "GrandPyBot, dis-moi tout sur la Barbade. "
         self.sentence_to_parse9 = "Est-ce que tu es allé au Timor oriental ? "
 
+        self.empty_sentence_to_parse = ""
+
+        self.only_stop_word_to_parse = "Je tu que est le les des de donc car"
+
         # For verify the good shape of message send for API request
         self.api_request_localisation = "pralognan"
 
@@ -91,6 +95,16 @@ class TestParse:
         assert [word for word in parse.parse_message_from_front(message_from_front=message_to_parse7) if word in ["hong-kong"]]
         assert [word for word in parse.parse_message_from_front(message_from_front=message_to_parse8) if word in ["barbade"]]
         assert [word for word in parse.parse_message_from_front(message_from_front=message_to_parse9) if word in ["timor", "oriental"]]
+
+    def test_empty_sentence_to_parse(self):
+        empty_sentence = self.empty_sentence_to_parse
+        parse = script.TheWikiMediaParseCom()
+        assert parse.parse_message_from_front(empty_sentence) == []
+
+    def test_only_stop_word_to_parse(self):
+        only_stop_word = self.only_stop_word_to_parse
+        parse = script.TheWikiMediaParseCom()
+        assert parse.parse_message_from_front(only_stop_word) == []
 
     def test_json_parser_search(self, monkeypatch):
         # Do mock to mock API Wiki Media message: 2 mock, one for title search, one for extract.
