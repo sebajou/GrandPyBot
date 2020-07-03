@@ -106,7 +106,7 @@ class TestParse:
         parse = script.TheWikiMediaParseCom()
         assert parse.parse_message_from_front(only_stop_word) == []
 
-    def test_json_parser_search(self, monkeypatch):
+    def test_json_parser_title(self, monkeypatch):
         # Do mock to mock API Wiki Media message: 2 mock, one for title search, one for extract.
         # mock1: https://fr.wikipedia.org/w/api.php?action=query&list=search&srsearch=port+vieux+marseille&format=json
         media_wiki_request_result2 = self.media_wiki_request_result
