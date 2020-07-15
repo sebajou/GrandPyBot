@@ -49,4 +49,8 @@ class Parser:
         parse_message_from_front = self.format_verb(list_message_from_front)
 
         # Remove stopWord from parse_message_from_front
-        return [word for word in parse_message_from_front if not word in self.fr_stop_word]
+        word = [word for word in parse_message_from_front if not word in self.fr_stop_word]
+
+        print(word)
+
+        return word

@@ -1,10 +1,9 @@
 import GrandPyBotApp.functions.GoogleMapParseCom as script
 import requests
 import pytest
-from GrandPyBotApp import app
 import json
 
-GOOGLE_MAP_API_KEY = app.config['GOOGLE_MAP_API_KEY']
+
 
 
 class TestParse:

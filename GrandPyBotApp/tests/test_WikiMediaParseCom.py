@@ -111,7 +111,7 @@ class TestParse:
         # mock1: https://fr.wikipedia.org/w/api.php?action=query&list=search&srsearch=port+vieux+marseille&format=json
         media_wiki_request_result2 = self.media_wiki_request_result
 
-        class MockSearchResponse:
+        """class MockSearchResponse:
             def read(self):
                 results_string = json.dumps(media_wiki_request_result2)
                 results_bytes = results_string.encode()
@@ -124,11 +124,11 @@ class TestParse:
         monkeypatch.setattr('GrandPyBotApp.functions.WikiMediaParseCom.TheWikiMediaParseCom.get_title_from_api',
                             mock_json_return_from_wiki_api)
 
-        response = mock_json_return_from_wiki_api(self.media_wiki_request_result)
+        response = mock_json_return_from_wiki_api(self.media_wiki_request_result)"""
 
         json_title_rep = script.TheWikiMediaParseCom()
 
-        assert json_title_rep.json_title(response) == "Pralognan-la-Vanoise"
+        assert json_title_rep.json_title(media_wiki_request_result2) == "Pralognan-la-Vanoise"
 
     def test_json_parser_extract(self, monkeypatch):
         # mock2: https://fr.wikipedia.org/w/api.php?action=query&prop=extracts&exsentences=10&exlimit=1&titles=Pralognan-la-Vanoise&explaintext=1&format=json

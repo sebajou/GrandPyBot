@@ -17,9 +17,9 @@ class TheWikiMediaParseCom(Parser):
             "srsearch": message_to_api
         }
 
-        r = requests.get(url=URL, params=PARAMS)
-        title = r.json()
-
+        r_object = requests.get(url=URL, params=PARAMS)
+        title = r_object.json()
+        print (message_to_api)
         return title
 
     def get_extract_from_api(self, title):
@@ -44,23 +44,23 @@ class TheWikiMediaParseCom(Parser):
     @staticmethod
     def json_title(media_wiki_request_search_result):
         # Load media_wiki_request_search_result in a subscriptable objet: a json
-        chaine_bytes = media_wiki_request_search_result.read()
+        """chaine_bytes = media_wiki_request_search_result.read()
         chaine = chaine_bytes.decode("utf8")
         data = json.loads(chaine)
         # Wiki media API json results from request for title.
-        return_results = data['query']['search'][0]['title']
+        return_results = data['query']['search'][0]['title']"""
+        return_results = media_wiki_request_search_result['query']['search'][0]['title']
         return return_results
 
     @staticmethod
     def json_extract(media_wiki_request_extract_result):
         # Loop in Wiki media API json results from request for extract text Wiki.
         media_wiki_request_extract_result = json.loads(media_wiki_request_extract_result.read().decode("utf8"))
+        string_extract = ""
         # Loop in Wiki media API json results from request for title.
         for json_content in media_wiki_request_extract_result["query"]['pages']:
             for json_content2 in media_wiki_request_extract_result["query"]['pages'][json_content]:
                 if json_content2 == 'extract':
-                    json_content3 = media_wiki_request_extract_result["query"]['pages'][json_content][json_content2]
-
-        string_extract = json_content3
+                    string_extract = media_wiki_request_extract_result["query"]['pages'][json_content][json_content2]
 
         return string_extract

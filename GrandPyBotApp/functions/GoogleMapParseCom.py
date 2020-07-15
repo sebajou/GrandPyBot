@@ -1,5 +1,6 @@
 import requests
 from GrandPyBotApp.functions.Parse import Parser
+from config import *
 from GrandPyBotApp import app
 from PIL import Image
 from io import BytesIO
