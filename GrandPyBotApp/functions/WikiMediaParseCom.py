@@ -18,20 +18,21 @@ class TheWikiMediaParseCom(Parser):
         }
 
         r_object = requests.get(url=URL, params=PARAMS)
-        title = r_object.json()
-        print (message_to_api)
-        return title
+
+        media_wiki_request_search_result = r_object.json()
+
+        return media_wiki_request_search_result
 
     def get_extract_from_api(self, title):
         # API Get extract from WikiMedia API
         URL = "https://fr.wikipedia.org/w/api.php"
-
+        TITLE = title
         PARAMS = {
             "action": "query",
             "prop": "extracts",
             "exsentences": "10",
             "exlimit": "1",
-            "titles": "Pralognan-la-Vanoise",
+            "titles": TITLE,
             "explaintext": "1",
             "format": "json"
         }
@@ -49,13 +50,15 @@ class TheWikiMediaParseCom(Parser):
         data = json.loads(chaine)
         # Wiki media API json results from request for title.
         return_results = data['query']['search'][0]['title']"""
+
         return_results = media_wiki_request_search_result['query']['search'][0]['title']
+
         return return_results
 
     @staticmethod
     def json_extract(media_wiki_request_extract_result):
         # Loop in Wiki media API json results from request for extract text Wiki.
-        media_wiki_request_extract_result = json.loads(media_wiki_request_extract_result.read().decode("utf8"))
+        # media_wiki_request_extract_result = json.loads(media_wiki_request_extract_result.read().decode("utf8"))
         string_extract = ""
         # Loop in Wiki media API json results from request for title.
         for json_content in media_wiki_request_extract_result["query"]['pages']:

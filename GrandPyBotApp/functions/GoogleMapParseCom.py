@@ -1,12 +1,12 @@
 import requests
 from GrandPyBotApp.functions.Parse import Parser
 from config import *
-from GrandPyBotApp import app
+# from GrandPyBotApp import app
 from PIL import Image
 from io import BytesIO
 import json
 
-GOOGLE_MAP_API_KEY = app.config['GOOGLE_MAP_API_KEY']
+# GOOGLE_MAP_API_KEY = app.config['GOOGLE_MAP_API_KEY']
 
 
 class TheGoogleMapParseCom(Parser):
@@ -56,14 +56,19 @@ class TheGoogleMapParseCom(Parser):
 
     def get_image_from_api(self, coordinates, title):
         """ Function for interogate Google Map API with coordinates to obtain a static map. """
-        URL = "https://maps.googleapis.com/maps/api/staticmap"
-        COORDINATES = coordinates
-        PARAMS = {
-            "center": COORDINATES,
-            "zoom": "16",
-            "size": "400x400",
-            "key": GOOGLE_MAP_API_KEY
-        }
-        img = requests.get(url=URL, params=PARAMS)
-        i = Image.open(BytesIO(img.content))
-        i.save('GrandPyBotApp/static/img/'+title, format='png')
+
+        zoom = ["16", "10", "5"]
+
+        for ZOOM in zoom:
+            URL = "https://maps.googleapis.com/maps/api/staticmap"
+            COORDINATES = coordinates
+            PARAMS = {
+                "center": COORDINATES,
+                "zoom": ZOOM,
+                "size": "400x400",
+                "key": GOOGLE_MAP_API_KEY
+            }
+            img = requests.get(url=URL, params=PARAMS)
+            i = Image.open(BytesIO(img.content))
+            # i.save('GrandPyBotApp/static/img/'+title, format='png')
+            i.show()

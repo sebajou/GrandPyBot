@@ -51,6 +51,11 @@ class Parser:
         # Remove stopWord from parse_message_from_front
         word = [word for word in parse_message_from_front if not word in self.fr_stop_word]
 
+        if len(word) > 0:
+            for element in word:
+                word = str(word)
+                word = word + ' ' + element
+
         print(word)
 
         return word
