@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, url_for, jsonify
+from flask import Flask, request, render_template, jsonify
 from GrandPyBotApp.functions.Parse import Parser
 from GrandPyBotApp.functions.WikiMediaParseCom import TheWikiMediaParseCom
 from GrandPyBotApp.functions.googleMapCoordinates import Coordinates
@@ -13,15 +13,15 @@ app.config.from_object('config')
 # To get one variable, tape app.config['MY_VARIABLE'] ex app.config['SECRET_KEY']
 
 
-"""@app.route("/")
+@app.route("/")
 def index():
     return render_template("home.html")
-@app.route("/conversation", methods=["GET", "POST"])
-def conversation():"""
 
 
-@app.route("/", methods=["GET", "POST"])
-def index():
+@app.route('/conversation', methods=['GET', 'POST'])
+def conversation():
+
+    print("prout")
 
     if request.method == "GET":
         return render_template("home.html")
@@ -69,9 +69,9 @@ def index():
 
         print(final_message)
 
-        #return jsonify({'question': final_message})
-        return render_template("home.html")
+        return jsonify({'question': final_message})
+        # return render_template("home.html")
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

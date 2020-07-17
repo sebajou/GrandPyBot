@@ -1,15 +1,18 @@
 $(document).ready(function() {
-	$('form').on('submit', function(event) {
+
+	$('#questionInput').keypress(function(event) {
 		$.ajax({
 			data : {
-				question : $('#question').val(),
+				question : $('#questionInput').val(),
 			},
 			type : 'POST',
 			url : '/conversation'
 		})
 		.done(function(data) {
+
             $('#response').text(data.question).show();
+			}
 		});
 		event.preventDefault();
+
 	});
-});
