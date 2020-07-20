@@ -54,7 +54,7 @@ class TheGoogleMapParseCom(Parser):
 
         return string_coordinates
 
-    def get_image_from_api(self, coordinates, title):
+    def get_image_from_api(self, coordinates):
         """ Function for interogate Google Map API with coordinates to obtain a static map. """
 
         zoom = ["16", "10", "5"]

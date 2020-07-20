@@ -15,18 +15,16 @@ app.config.from_object('config')
 
 @app.route("/")
 def index():
+    print("oulala")
     return render_template("home.html")
 
 
-@app.route('/conversation', methods=['GET', 'POST'])
+@app.route('/conversation', methods=['POST'])
 def conversation():
 
-    print("prout")
-
-    if request.method == "GET":
-        return render_template("home.html")
-
     if request.method == "POST":
+        print("flute")
+
         # Collect the question
         question = request.form["question"]
         print("La question : " + question)
@@ -61,12 +59,10 @@ def conversation():
 
         # Get google map image from API with coordinates
         api_google_map = TheGoogleMapParseCom()
-        api_google_map.get_image_from_api(request_coord, api_response_title)
+        api_google_map.get_image_from_api(request_coord)
 
         # Print all message for the front
-        print(random_message, extract)
         final_message = random_message + ' ' + extract
-
         print(final_message)
 
         return jsonify({'question': final_message})

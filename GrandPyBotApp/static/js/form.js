@@ -1,9 +1,9 @@
 $(document).ready(function() {
 
-	$('#questionInput').keypress(function(event) {
+    $('form').on('submit', function(event) {
 		$.ajax({
 			data : {
-				question : $('#questionInput').val(),
+				question : $('#questionInput').val()
 			},
 			type : 'POST',
 			url : '/conversation'
@@ -11,8 +11,7 @@ $(document).ready(function() {
 		.done(function(data) {
 
             $('#response').text(data.question).show();
-			}
-		});
+			});
 		event.preventDefault();
-
+		});
 	});
