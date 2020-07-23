@@ -53,6 +53,7 @@ class TheWikiMediaParseCom(Parser):
 
         return_results = media_wiki_request_search_result['query']['search'][0]['title']
 
+
         return return_results
 
     @staticmethod

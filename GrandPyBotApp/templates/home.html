@@ -1,44 +1,60 @@
 <!doctype html>
 <html lang="fr">
   <head>
+
+    <meta charset="utf-8">
+
     <title>GrandPyBot</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"></script>
     <link rel="stylesheet" href="../static/css/GrandPyBot_style.css" />
     <script src="{{ url_for('static', filename='js/form.js') }}"></script>
   </head>
   <body>
-    </p>
-        <header>
-            <h1>GrandPyBot, vous écoute, écoutez-le...</h1>
-            <p><a href="../static/img/logoGrandPyBot.jpg"><img src="logoGrandPyBot.jpg" alt="Logo de GrandPyBot" /></a></p>
-            <h2>Poser votre question à GrandPyBot (et prévoyez au moins une heure d'explication).</h2>
+    <div class="container">
+        <header class="row">
+            <div class="col-md-10">
+                <h1>GrandPyBot, vous écoute, écoutez-le...</h1>
+                <h2>Poser votre question à GrandPyBot (et prévoyez au moins une heure d'explication).</h2>
+            </div>
+            <div class="col-md-2">
+                <p><a href="../static/img/logoGrandPyBot.jpg">
+                <img src="../static/img/logoGrandPyBot.jpg" alt="Logo de GrandPyBot" />
+                </a></p>
+                <br/>
+            </div>
         </header>
 
-        <section>
-            <article>
-                <div id="content">
-                    <form>
-                        <p>Votre question pour GrandPyBot:
-                        <input type="text" id="questionInput" placeholder="votre question" formmethod="post">
-                        <input type='submit' formmethod="post">
-                    </form>
-                    <div id="response"></div>
-                </div>
-            </article>
+        <section class="row">
+            <div class="col-md-12">
+                <article>
+                    <div id="content">
+                        <form>
+                            <p>Votre question pour GrandPyBot:
+                            <input type="text" id="questionInput" placeholder="votre question" formmethod="post">
+                            <input type='submit' formmethod="post" onclick="$('#loading').show();">
+                        </form>
+                        <img id="imageMap" src="" />
+                        <div id="loading" style="display:none;"><img src="../static/img/waiting_robot.gif" alt="" />Loading!</div>
+                        <div id="response" style="display:none;"></div>
+                    </div>
+                </article>
+            </div>
         </section>
 
-        <footer>
-            <p>Sébastien Jourdan - Etudiant sur OpenClassrooms<br />
-            <a href="https://github.com/sebajou/GrandPyBot">Lien Github</a></p>
+        <footer class="row">
+            <div class="col-md-12">
+                <br/>
+                <p>Sébastien Jourdan - Etudiant sur OpenClassrooms<br />
+                <a href="https://github.com/sebajou/GrandPyBot">Lien Github</a></p>
+            </div>
         </footer>
-
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="../static/js/form.js"></script>
-    <script src="../static/css/GrandPyBot_style.css"></script>
+    </div>
   </body>
 </html>

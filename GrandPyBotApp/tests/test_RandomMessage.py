@@ -4,6 +4,7 @@ import pytest
 
 class TestRandom:
 
-    def test_random_message(self):
+    @staticmethod
+    def test_random_message():
 
         assert str(Script.TheRandomMessage.random_message())

@@ -57,12 +57,12 @@ def conversation():
         extract_json = api_request.get_extract_from_api(api_response_title)
         extract = api_request.json_extract(extract_json)
 
-        # Get google map image from API with coordinates
+        # Get google map images from API with coordinates
         api_google_map = TheGoogleMapParseCom()
-        api_google_map.get_image_from_api(request_coord)
+        imgList = api_google_map.get_image_from_api(request_coord)
 
         # Print all message for the front
-        final_message = random_message + ' ' + extract
+        final_message = "<p style=\"color:#04fc6d;\">Vous : " + question + " <p/>" + "<p style=\"color:#0417fc;\"> GrandPyBot : " + random_message + '<p/>' + extract
         print(final_message)
 
         return jsonify({'question': final_message})
