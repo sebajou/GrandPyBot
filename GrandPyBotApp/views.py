@@ -15,7 +15,6 @@ app.config.from_object('config')
 
 @app.route("/")
 def index():
-    print("oulala")
     return render_template("home.html")
 
 
@@ -23,7 +22,6 @@ def index():
 def conversation():
 
     if request.method == "POST":
-        print("flute")
 
         # Collect the question
         question = request.form["question"]
@@ -34,15 +32,16 @@ def conversation():
         parsed = do_parser.parse_message_from_front(question)
         parsed_requested_question = ""
         for element in parsed:
-            parsed_requested_question = parsed_requested_question + element
+            parsed_requested_question = parsed_requested_question + " " + element
 
         # Display a Random message
         random_class = TheRandomMessage()
-        random_message= random_class.random_message()
+        random_message = random_class.random_message()
 
         # Get coordinates from parsed_requested_question
         api_request_coord = Coordinates()
         request_coord = api_request_coord.get_coordinates(parsed_requested_question)
+        print(parsed_requested_question)
 
         # Request the API Wiki Media with the parsed element
         api_request = TheWikiMediaParseCom()
@@ -59,14 +58,17 @@ def conversation():
 
         # Get google map images from API with coordinates
         api_google_map = TheGoogleMapParseCom()
-        imgList = api_google_map.get_image_from_api(request_coord)
+        imgUrlList = api_google_map.get_image_from_api(request_coord)
+
+        imgUrlList1 = imgUrlList[0]
+        imgUrlList2 = imgUrlList[1]
+        imgUrlList3 = imgUrlList[2]
 
         # Print all message for the front
         final_message = "<p style=\"color:#04fc6d;\">Vous : " + question + " <p/>" + "<p style=\"color:#0417fc;\"> GrandPyBot : " + random_message + '<p/>' + extract
         print(final_message)
 
-        return jsonify({'question': final_message})
-        # return render_template("home.html")
+        return jsonify({'question': final_message, 'imgUrlList1': imgUrlList1})
 
 
 if __name__ == "__main__":

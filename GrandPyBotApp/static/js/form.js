@@ -4,13 +4,15 @@ $(document).ready(function() {
 		$.ajax({
 			data : {
 				question : $('#questionInput').val(),
+				imgUrlList1 : $('#imgUrlList1').val(),
 			},
 			type : 'POST',
 			url : '/conversation'
 		})
 		.done(function(data) {
-            $('#response').html(data.question).show();
             $('#loading').hide();
+            $('#response').html(data.question).show();
+            $('#imgUrlList1').text(data.imgUrlList1).show();
 			});
 		event.preventDefault();
 		});

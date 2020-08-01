@@ -21,7 +21,7 @@
             </div>
             <div class="col-md-2">
                 <p><a href="../static/img/logoGrandPyBot.jpg">
-                <img src="../static/img/logoGrandPyBot.jpg" alt="Logo de GrandPyBot" />
+
                 </a></p>
                 <br/>
             </div>
@@ -36,9 +36,10 @@
                             <input type="text" id="questionInput" placeholder="votre question" formmethod="post">
                             <input type='submit' formmethod="post" onclick="$('#loading').show();">
                         </form>
-                        <img id="imageMap" src="" />
                         <div id="loading" style="display:none;"><img src="../static/img/waiting_robot.gif" alt="" />Loading!</div>
                         <div id="response" style="display:none;"></div>
+                        <div id="imgUrlList1" style="display:none;"></div>
+                        <img "{{ url_for('static', filename='js/form.js') }}" />
                     </div>
                 </article>
             </div>
