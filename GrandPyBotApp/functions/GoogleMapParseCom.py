@@ -58,6 +58,7 @@ class TheGoogleMapParseCom(Parser):
         """ Function for interogate Google Map API with coordinates to obtain a static map. """
 
         zoom = ["16", "10", "5"]
+        imgUrlList =[]
 
         for ZOOM in zoom:
             URL = "https://maps.googleapis.com/maps/api/staticmap"
@@ -69,6 +70,15 @@ class TheGoogleMapParseCom(Parser):
                 "key": GOOGLE_MAP_API_KEY
             }
             img = requests.get(url=URL, params=PARAMS)
-            i = Image.open(BytesIO(img.content))
+
+            img_io = BytesIO(img.content)
+            i = Image.open(img_io)
+
+            imgUrlList.append(img.url)
+
+            print("URL list")
+            print(imgUrlList)
             # i.save('GrandPyBotApp/static/img/'+title, format='png')
             i.show()
+
+        return imgUrlList

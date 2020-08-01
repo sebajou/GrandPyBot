@@ -6,10 +6,10 @@ h1, h1 + p, h2
     margin-right: 10%;
 }
 
-img
+/*img
 {
     float: right;
-}
+}*/
 
 h2
 {
@@ -22,17 +22,30 @@ h3
     left: 50px;
 }
 
-section
+/*section
 {
     display: inline-block;
     vertical-align: top;
     margin-right: 2%;
-}
+    height:80%;
+}*/
 
 footer
 {
     text-align: center;
     left: 150px;
-    position: absolute;
+    /* position: absolute; */
     bottom: 0px;
+}
+
+.row {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
 }
