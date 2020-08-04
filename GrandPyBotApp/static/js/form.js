@@ -12,6 +12,7 @@ $(document).ready(function() {
 		.done(function(data) {
             $('#loading').hide();
             $('#response').html(data.question).show();
+            document.getElementById("imgUrlList1").src = data.imgUrlList1;
             $('#imgUrlList1').text(data.imgUrlList1).show();
 			});
 		event.preventDefault();
