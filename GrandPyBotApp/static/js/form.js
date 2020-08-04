@@ -5,6 +5,8 @@ $(document).ready(function() {
 			data : {
 				question : $('#questionInput').val(),
 				imgUrlList1 : $('#imgUrlList1').val(),
+				imgUrlList2 : $('#imgUrlList2').val(),
+				imgUrlList3 : $('#imgUrlList3').val(),
 			},
 			type : 'POST',
 			url : '/conversation'
@@ -13,7 +15,8 @@ $(document).ready(function() {
             $('#loading').hide();
             $('#response').html(data.question).show();
             document.getElementById("imgUrlList1").src = data.imgUrlList1;
-            $('#imgUrlList1').text(data.imgUrlList1).show();
+            document.getElementById("imgUrlList2").src = data.imgUrlList2;
+            document.getElementById("imgUrlList3").src = data.imgUrlList3;
 			});
 		event.preventDefault();
 		});

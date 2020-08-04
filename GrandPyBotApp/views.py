@@ -68,7 +68,7 @@ def conversation():
         final_message = "<p style=\"color:#04fc6d;\">Vous : " + question + " <p/>" + "<p style=\"color:#0417fc;\"> GrandPyBot : " + random_message + '<p/>' + extract
         print(final_message)
 
-        return jsonify({'question': final_message, 'imgUrlList1': imgUrlList1})
+        return jsonify({'question': final_message, 'imgUrlList1': imgUrlList1, 'imgUrlList2': imgUrlList2, 'imgUrlList3': imgUrlList3})
 
 
 if __name__ == "__main__":
