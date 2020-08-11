@@ -1,5 +1,4 @@
 
-
 h1, h1 + p, h2
 {
     text-align: center;
@@ -34,8 +33,9 @@ footer
 {
     text-align: center;
     left: 150px;
-    /* position: absolute; */
+    /*position: absolute;*/
     bottom: 0px;
+    background-color: white;
 }
 
 .row {

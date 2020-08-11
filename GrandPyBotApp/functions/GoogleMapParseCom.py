@@ -71,14 +71,6 @@ class TheGoogleMapParseCom(Parser):
             }
             img = requests.get(url=URL, params=PARAMS)
 
-            img_io = BytesIO(img.content)
-            i = Image.open(img_io)
-
             imgUrlList.append(img.url)
-
-            print("URL list")
-            print(imgUrlList)
-            # i.save('GrandPyBotApp/static/img/'+title, format='png')
-            i.show()
 
         return imgUrlList
