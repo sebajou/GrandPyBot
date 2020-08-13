@@ -66,7 +66,7 @@ class TheGoogleMapParseCom(Parser):
             PARAMS = {
                 "center": COORDINATES,
                 "zoom": ZOOM,
-                "size": "400x400",
+                "size": "350x350",
                 "key": GOOGLE_MAP_API_KEY
             }
             img = requests.get(url=URL, params=PARAMS)

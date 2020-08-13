@@ -6,6 +6,7 @@ $(document).ready(function() {
 				imgUrlList1 : $('#imgUrlList1').val(),
 				imgUrlList2 : $('#imgUrlList2').val(),
 				imgUrlList3 : $('#imgUrlList3').val(),
+				memResponse : $('#memResponse').val(),
 			},
 			type : 'POST',
 			url : '/conversation'
@@ -16,6 +17,7 @@ $(document).ready(function() {
             document.getElementById("imgUrlList1").src = data.imgUrlList1;
             document.getElementById("imgUrlList2").src = data.imgUrlList2;
             document.getElementById("imgUrlList3").src = data.imgUrlList3;
+            $('#memResponse').html(data.memResponse).show();
 			});
 		event.preventDefault();
 		});

@@ -69,19 +69,24 @@ def conversation():
         imgUrlList2 = imgUrlList[1]
         imgUrlList3 = imgUrlList[2]
 
+
         # Print all message for the front
-        final_message = "<p style=\"color:#04fc6d;\">Vous : " + question + " <p/>" \
+        final_message = "<p style=\"color:#04fc6d;\">Vous : " + question + "<p/>" \
             + "<p style=\"color:#0417fc;\"> GrandPyBot : " + random_message \
             + "<p/>" + extract + "<br>"
 
-        if 'memJsonify' not in session:
-            session['memJsonify'] = []
 
-        session['memJsonify'].append(final_message)
-        session['memJsonify'].reverse()
+        # Memorise old message
+        if 'memMessage' not in session:
+            session['memMessage'] = []
 
-        return jsonify({'question': session['memJsonify'], 'imgUrlList1': imgUrlList1,
-                        'imgUrlList2': imgUrlList2, 'imgUrlList3': imgUrlList3})
+        session['memMessage'].append(final_message)
+        session['memMessage'].reverse()
+        listMemMessage = session['memMessage']
+
+        return jsonify({'question': listMemMessage[0], 'imgUrlList1': imgUrlList1,
+                        'imgUrlList2': imgUrlList2, 'imgUrlList3': imgUrlList3,
+                        'memResponse': str(listMemMessage[1:]).strip('[]').strip(', ')})
 
 
 if __name__ == "__main__":
