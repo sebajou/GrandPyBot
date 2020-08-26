@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template, jsonify, session
+from flask_session import Session
 from GrandPyBotApp.functions.Parse import Parser
 from GrandPyBotApp.functions.WikiMediaParseCom import TheWikiMediaParseCom
 from GrandPyBotApp.functions.googleMapCoordinates import Coordinates
@@ -11,8 +12,11 @@ app = Flask(__name__)
 
 # Config options 
 app.config.from_object('config')
+app.config['SESSION_TYPE'] = 'filesystem'
 # To get one variable, tape app.config['MY_VARIABLE'] ex app.config['SECRET_KEY']
 app.secret_key = SECRET_KEY
+sess = Session()
+sess.init_app(app)
 
 
 @app.route("/")
@@ -71,22 +75,25 @@ def conversation():
 
 
         # Print all message for the front
-        final_message = "<p style=\"color:#04fc6d;\">Vous : " + question + "<p/>" \
+        final_message = "<br>" + "<p style=\"color:#04fc6d;\">Vous : " + question + "<p/>" \
             + "<p style=\"color:#0417fc;\"> GrandPyBot : " + random_message \
-            + "<p/>" + extract + "<br>"
-
+            + "<p/>" + extract + "<br>" + " "
 
         # Memorise old message
         if 'memMessage' not in session:
             session['memMessage'] = []
 
         session['memMessage'].append(final_message)
-        session['memMessage'].reverse()
         listMemMessage = session['memMessage']
 
-        return jsonify({'question': listMemMessage[0], 'imgUrlList1': imgUrlList1,
-                        'imgUrlList2': imgUrlList2, 'imgUrlList3': imgUrlList3,
-                        'memResponse': str(listMemMessage[1:]).strip('[]').strip(', ')})
+        listMemMessageRev = ""
+        for element in listMemMessage[:-1]:
+            listMemMessageRev = element + listMemMessageRev
+
+        return jsonify({'question': listMemMessage[-1], 'imgUrlList1': imgUrlList1,
+                        'imgUrlList2': imgUrlList2, 'imgUrlList3':
+                            imgUrlList3,
+                        'memResponse': listMemMessageRev})
 
 
 if __name__ == "__main__":
