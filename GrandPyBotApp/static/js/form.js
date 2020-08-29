@@ -21,4 +21,16 @@ $(document).ready(function() {
 			});
 		event.preventDefault();
 		});
+
+    $(function() {
+        $('a#eraseMemory').bind('click', function() {
+            $.getJSON('/clearSession',
+            function(data) {
+                location.reload();
+                window.location.reload();
+        });
+            return false;
+        });
+    });
+
 	});

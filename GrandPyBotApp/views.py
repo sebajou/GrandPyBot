@@ -23,6 +23,10 @@ sess.init_app(app)
 def index():
     return render_template("home.html")
 
+@app.route('/clearSession', methods=['GET'])
+def clearSession():
+    session.clear()
+    return render_template("home.html")
 
 @app.route('/conversation', methods=['POST'])
 def conversation():
