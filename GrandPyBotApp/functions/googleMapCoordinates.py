@@ -22,13 +22,17 @@ class Coordinates:
     @staticmethod
     def parse_coordinates_from_api(data_coordinates):
 
-        lat = data_coordinates['results'][0]['geometry']['location']['lat']
-        lng = data_coordinates['results'][0]['geometry']['location']['lng']
-        lat = str(lat)
-        lng = str(lng)
+        try:
+            lat = data_coordinates['results'][0]['geometry']['location']['lat']
+            lng = data_coordinates['results'][0]['geometry']['location']['lng']
+            lat = str(lat)
+            lng = str(lng)
+        except:
+            print("No coordinates corresponding to the request.")
+            atlantide = "45.9996836, -73.9187669"
+            return atlantide
 
         coordinates = lat + ', ' + lng
-
         return coordinates
 
     def get_coordinates(self, title):

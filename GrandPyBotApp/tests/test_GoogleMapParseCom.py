@@ -38,6 +38,7 @@ class TestParse:
         message_to_parse7 = self.sentence_to_parse7
         message_to_parse8 = self.sentence_to_parse8
         message_to_parse9 = self.sentence_to_parse9
+
         # Control that word in message_to_parse are present in a given list
         parse = script.TheGoogleMapParseCom()
         assert [word for word in parse.parse_message_from_front(message_from_front=message_to_parse1) if word in ["openclassrooms"]]

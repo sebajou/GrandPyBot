@@ -23,10 +23,12 @@ sess.init_app(app)
 def index():
     return render_template("home.html")
 
+
 @app.route('/clearSession', methods=['GET'])
 def clearSession():
     session.clear()
     return render_template("home.html")
+
 
 @app.route('/conversation', methods=['POST'])
 def conversation():
@@ -77,11 +79,18 @@ def conversation():
         imgUrlList2 = imgUrlList[1]
         imgUrlList3 = imgUrlList[2]
 
+        # Message in case of bad request
+        if api_response_title == "Atlantide":
+            final_message = "<br>" + "<p style=\"color:#04fc6d;\">Vous : " + question + "<p/>" \
+                            + "<p style=\"color:#0417fc;\"> GrandPyBot : " \
+                            + "Je n'est pas bien entendu ta question. Tu veux parler de l'île cachée de l'Atlantide ? " \
+                            + random_message + "<p/>" + extract + "<br>" + " "
 
         # Print all message for the front
-        final_message = "<br>" + "<p style=\"color:#04fc6d;\">Vous : " + question + "<p/>" \
-            + "<p style=\"color:#0417fc;\"> GrandPyBot : " + random_message \
-            + "<p/>" + extract + "<br>" + " "
+        else:
+            final_message = "<br>" + "<p style=\"color:#04fc6d;\">Vous : " + question + "<p/>" \
+                + "<p style=\"color:#0417fc;\"> GrandPyBot : " + random_message \
+                + "<p/>" + extract + "<br>" + " "
 
         # Memorise old message
         if 'memMessage' not in session:
@@ -99,6 +108,3 @@ def conversation():
                             imgUrlList3,
                         'memResponse': listMemMessageRev})
 
-
-if __name__ == "__main__":
-    app.run(debug=True)
