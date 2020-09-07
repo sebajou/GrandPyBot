@@ -1,8 +1,13 @@
 import pytest
 from GrandPyBotApp.views import app
 
-app.testing = True
-client = app.test_client()
+
+@pytest.fixture
+def client():
+    app.config['TESTING'] = True
+
+    with app.test_client() as client:
+        yield client
 
 
 class TestRoutes:
