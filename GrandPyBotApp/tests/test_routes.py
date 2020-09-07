@@ -19,22 +19,18 @@ class TestRoutes:
         self.empty_to_post = ""
 
     @staticmethod
-    def test_view_home():
-        with app.test_client() as c:
-            assert c.get('/').status_code == 200
+    def test_view_home(client):
+        assert client.get('/').status_code == 200
 
-    def test_view(self):
+    def test_view(self, client):
         to_post = self.normal_to_post
-        with app.test_client() as c:
-            assert c.post('/conversation', data=dict(question=to_post)).status_code == 200
+        assert client.post('/conversation', data=dict(question=to_post)).status_code == 200
 
-    def test_view_absurd(self):
+    def test_view_absurd(self, client):
         to_post = self.absurd_to_post
-        with app.test_client() as c:
-            assert c.post('/conversation', data=dict(question=to_post)).status_code == 200
+        assert client.post('/conversation', data=dict(question=to_post)).status_code == 200
 
-    def test_view_empty(self):
+    def test_view_empty(self, client):
         to_post = self.empty_to_post
-        with app.test_client() as c:
-            assert c.post('/conversation', data=dict(question=to_post)).status_code == 200
+        assert client.post('/conversation', data=dict(question=to_post)).status_code == 200
 
