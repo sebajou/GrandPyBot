@@ -12,11 +12,8 @@ app = Flask(__name__)
 
 # Config options 
 app.config.from_object('config')
-app.config['SESSION_TYPE'] = 'filesystem'
 # To get one variable, tape app.config['MY_VARIABLE'] ex app.config['SECRET_KEY']
 app.secret_key = SECRET_KEY
-sess = Session()
-sess.init_app(app)
 
 
 @app.route("/")
@@ -24,19 +21,10 @@ def index():
     return render_template("home.html")
 
 
-@app.route('/clearSession', methods=['GET'])
-def clearSession():
-    session.clear()
-    return render_template("home.html")
-
-
 @app.route('/conversation', methods=['POST'])
 def conversation():
 
     if request.method == "POST":
-
-        # Log in session
-        session['username'] = "userNameSession"
 
         # Collect the question
         question = request.form["question"]
@@ -67,6 +55,12 @@ def conversation():
         print("api response title: ")
         print(api_response_title)
 
+        # Extract formated address from requested coordinates
+        coord = api_request_coord.get_coordinates_from_api(api_response_title)
+        formated_address = api_request_coord.get_formatted_address(coord)
+        print(formated_address)
+
+
         # Get the extract from API with title
         extract_json = api_request.get_extract_from_api(api_response_title)
         extract = api_request.json_extract(extract_json)
@@ -80,31 +74,25 @@ def conversation():
         imgUrlList3 = imgUrlList[2]
 
         # Message in case of bad request
-        if api_response_title == "Atlantide":
+        if api_response_title == "Empty request":
+            final_message = "<br>" + "<p style=\"color:#04fc6d;\">Vous : " + question + "<p/>" \
+                            + "<p style=\"color:#0417fc;\"> GrandPyBot : " \
+                            + "Je n'est pas bien entendu ta question. Tu as dit quelques chose ? "
+
+        elif api_response_title == "Atlantide":
             final_message = "<br>" + "<p style=\"color:#04fc6d;\">Vous : " + question + "<p/>" \
                             + "<p style=\"color:#0417fc;\"> GrandPyBot : " \
                             + "Je n'est pas bien entendu ta question. Tu veux parler de l'île cachée de l'Atlantide ? " \
-                            + random_message + "<p/>" + extract + "<br>" + " "
+                            + random_message \
+                            + " J'ai l'adresse. Garde-la pour toi, elle est secrète : " + formated_address \
+                            + "<p/>" + extract + "<br>" + " "
 
-        # Print all message for the front
+                # Print all message for the front
         else:
             final_message = "<br>" + "<p style=\"color:#04fc6d;\">Vous : " + question + "<p/>" \
                 + "<p style=\"color:#0417fc;\"> GrandPyBot : " + random_message \
+                + " Cette endroit se trouve à l'adresse : " + formated_address \
                 + "<p/>" + extract + "<br>" + " "
 
-        # Memorise old message
-        if 'memMessage' not in session:
-            session['memMessage'] = []
-
-        session['memMessage'].append(final_message)
-        listMemMessage = session['memMessage']
-
-        listMemMessageRev = ""
-        for element in listMemMessage[:-1]:
-            listMemMessageRev = element + listMemMessageRev
-
-        return jsonify({'question': listMemMessage[-1], 'imgUrlList1': imgUrlList1,
-                        'imgUrlList2': imgUrlList2, 'imgUrlList3':
-                            imgUrlList3,
-                        'memResponse': listMemMessageRev})
-
+        return jsonify({'question': final_message, 'imgUrlList1': imgUrlList1,
+                        'imgUrlList2': imgUrlList2, 'imgUrlList3': imgUrlList3})

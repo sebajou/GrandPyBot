@@ -33,17 +33,18 @@
                     <div id="content">
                         <form>
                             <p>Votre question pour GrandPyBot:
-                            <input type="text" id="questionInput" placeholder="votre question" formmethod="post">
-                            <input type='submit' formmethod="post" onclick="$('#loading').show();">
-                            <a href=# id=eraseMemory><button class='btn btn-default' onclick="history.go(0)">Appuie là et je perds la mémoire. </button></a>
+                            <input type="text" id="questionInput" placeholder="votre question" >
+                            <input type='submit' onclick="$('#loading').show();">
                             <button id = "find-me">Partage avec GrandPyBot ta position</button><br/>
                         </form>
                         <div id="loading" style="display:none;"><img src="../static/img/waiting_robot.gif" alt="" />Loading!</div>
-                        <div id="response" style="display:none;"></div>
-                        <img src="" id="imgUrlList3">
-                        <img src="" id="imgUrlList2">
-                        <img src="" id="imgUrlList1">
-                        <div id="memResponse" style="display:none;"></div>
+                        <div id="resp">
+                            <div id="response" style="display:none;"></div>
+                            <img src="" id="imgUrlList3">
+                            <img src="" id="imgUrlList2">
+                            <img src="" id="imgUrlList1">
+                            <div id="memSession"></div>
+                        </div>
                     </div>
                 </article>
             </div>

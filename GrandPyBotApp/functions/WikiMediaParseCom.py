@@ -50,9 +50,19 @@ class TheWikiMediaParseCom(Parser):
         data = json.loads(chaine)
         # Wiki media API json results from request for title.
         return_results = data['query']['search'][0]['title']"""
-
-        return_results = media_wiki_request_search_result['query']['search'][0]['title']
-
+        try:
+            return_results = media_wiki_request_search_result['query']['search'][0]['title']
+        except UnboundLocalError:
+            print("No result on media wiki")
+            return "Atlantide"
+        except IndexError:
+            print("No result on media wiki")
+            return "Atlantide"
+        except TypeError:
+            print("No result on media wiki")
+            return "Atlantide"
+        except KeyError:
+            return "Empty request"
 
         return return_results
 

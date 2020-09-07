@@ -1,3 +1,4 @@
+import pytest
 import GrandPyBotApp.functions.WikiMediaParseCom as script
 import json
 

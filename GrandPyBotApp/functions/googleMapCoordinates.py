@@ -27,10 +27,18 @@ class Coordinates:
             lng = data_coordinates['results'][0]['geometry']['location']['lng']
             lat = str(lat)
             lng = str(lng)
-        except:
+        except UnboundLocalError:
             print("No coordinates corresponding to the request.")
             atlantide = "45.9996836, -73.9187669"
             return atlantide
+        except IndexError:
+            print("No coordinates corresponding to the request.")
+            atlantide = "45.9996836, -73.9187669"
+            return atlantide
+        except KeyError:
+            print("Empty Request")
+            atlantique = "34.97532, -40.85828"
+            return atlantique
 
         coordinates = lat + ', ' + lng
         return coordinates
@@ -41,5 +49,16 @@ class Coordinates:
         coordinates = self.parse_coordinates_from_api(data_coordinates)
 
         return coordinates
+
+    @staticmethod
+    def get_formatted_address(data_coordinates):
+        try:
+            return data_coordinates['results'][0]['formatted_address']
+        except UnboundLocalError:
+            return "Quelques part sur terre"
+        except IndexError:
+            return "Quelques part sur terre"
+        except KeyError:
+            return "Quelques part sur terre"
 
 
