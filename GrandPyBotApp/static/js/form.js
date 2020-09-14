@@ -1,5 +1,3 @@
-console.log("Hello world! 1");
-
 $('form').on('submit', function(event) {
     $.ajax({
         // Get data from back
@@ -14,6 +12,7 @@ $('form').on('submit', function(event) {
     })
     // Do if AJAX done
     .done(function(data) {
+        console.log(data);
         // Hide loading gif
         $('#loading').hide();
         // Display data from back
@@ -22,8 +21,6 @@ $('form').on('submit', function(event) {
         document.getElementById("imgUrlList1").src = data.imgUrlList1;
         document.getElementById("imgUrlList2").src = data.imgUrlList2;
         document.getElementById("imgUrlList3").src = data.imgUrlList3;
-
-        console.log("Hello world! 2");
 
         // => Functions for memorise conversation in sessionStorage
         // Recuperation of field to record

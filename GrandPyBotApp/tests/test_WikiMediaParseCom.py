@@ -113,21 +113,16 @@ class TestParse:
         # Do mock to mock API Wiki Media message: 2 mock, one for title search, one for extract.
         # mock1: https://fr.wikipedia.org/w/api.php?action=query&list=search&srsearch=port+vieux+marseille&format=json
         media_wiki_request_result2 = self.media_wiki_request_result
-
         json_title_rep = script.TheWikiMediaParseCom()
-
         assert json_title_rep.json_title(media_wiki_request_result2) == "Pralognan-la-Vanoise"
 
     def test_absurd_sentence_json_title(self):
 
         absurd_sentence = self.absurd_sentence_json_title
-
         json_title_rep = script.TheWikiMediaParseCom()
-
         assert json_title_rep.json_title(absurd_sentence) == "Atlantide"
 
     def test_json_parser_extract(self):
         # mock2: https://fr.wikipedia.org/w/api.php?action=query&prop=extracts&exsentences=10&exlimit=1&titles=Pralognan-la-Vanoise&explaintext=1&format=json
         media_wiki_request_extract_result2 = self.media_wiki_request_extract_result
-
         assert script.TheWikiMediaParseCom.json_extract(media_wiki_request_extract_result2) == "Pralognan-la-Vanoise  est une commune fran\u00e7aise situ\u00e9e dans le d\u00e9partement de la Savoie, en r\u00e9gion Auvergne-Rh\u00f4ne-Alpes. Village de montagne du massif de la Vanoise, en Tarentaise, il comptait 724 habitants en 2017.\nLe village est une station touristique d'\u00e9t\u00e9 et de sports d'hiver install\u00e9e au c\u0153ur du parc national de la Vanoise, proposant de nombreuses activit\u00e9s sportives de montagne, telles que la randonn\u00e9e (les sentiers de grande randonn\u00e9e GR 5 et GR 55 y passent) ou des via ferrata.\n\n\n== G\u00e9ographie ==\n\n\n=== Situation ===\nPralognan-la-Vanoise est la derni\u00e8re commune de la vall\u00e9e de Bozel (Tarentaise). Le centre du village, situ\u00e9 \u00e0 environ 1 400 m\u00e8tres d'altitude, s'\u00e9tablit au confluent des vall\u00e9es glaciaires de la Gli\u00e8re et de Chavi\u00e8re. Toutes deux constituent des points de passage vers la vall\u00e9e de la Maurienne par le col de la Vanoise (2 517 m\u00e8tres) ou le col de Chavi\u00e8re (2 796 m\u00e8tres).\n\n\n=== Communes limitrophes ===\n\n\n=== G\u00e9ologie et relief, hydrographie ===\n\nLe Doron de Pralognan \u2014 form\u00e9 en amont de diff\u00e9rents cours d'eau (torrent de la Gli\u00e8re, du Dard et nant de la Cr\u00e9p\u00e9na, puis du ruisseau d'Isertan) \u2014 et le Doron de Chavi\u00e8re se rejoignent dans la commune. En aval, il conflue avec le Doron de Champagny pour former le Doron de Bozel.\n\n\n=== Climat ===\nLa situation de Pralognan-la-Vanoise, d'une altitude d'environ 1 400 m, la place dans un milieu continental montagnard caract\u00e9ris\u00e9 par une humidit\u00e9 marqu\u00e9e. Les hivers sont plus froids et neigeux, et la saison estivale douce avec parfois des \u00e9pisodes orageux."

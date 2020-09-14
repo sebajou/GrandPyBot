@@ -44,7 +44,6 @@ def conversation():
         # Get coordinates from parsed_requested_question
         api_request_coord = Coordinates()
         request_coord = api_request_coord.get_coordinates(parsed_requested_question)
-        print(parsed_requested_question)
 
         # Request the API Wiki Media with the parsed element
         api_request = TheWikiMediaParseCom()
@@ -52,14 +51,10 @@ def conversation():
 
         # Get the title from json
         api_response_title = api_request.json_title(api_response_json)
-        print("api response title: ")
-        print(api_response_title)
 
         # Extract formated address from requested coordinates
         coord = api_request_coord.get_coordinates_from_api(api_response_title)
         formated_address = api_request_coord.get_formatted_address(coord)
-        print(formated_address)
-
 
         # Get the extract from API with title
         extract_json = api_request.get_extract_from_api(api_response_title)
@@ -68,6 +63,8 @@ def conversation():
         # Get google map images from API with coordinates
         api_google_map = TheGoogleMapParseCom()
         imgUrlList = api_google_map.get_image_from_api(request_coord)
+        print("request_coord: ", request_coord)
+        print("imgUrlList: ", imgUrlList)
 
         imgUrlList1 = imgUrlList[0]
         imgUrlList2 = imgUrlList[1]
@@ -75,24 +72,25 @@ def conversation():
 
         # Message in case of bad request
         if api_response_title == "Empty request":
-            final_message = "<br>" + "<p style=\"color:#04fc6d;\">Vous : " + question + "<p/>" \
+            final_message = "<br><ul><p style=\"color:#04fc6d;\">Vous : " + question + "<p/>" \
                             + "<p style=\"color:#0417fc;\"> GrandPyBot : " \
-                            + "Je n'est pas bien entendu ta question. Tu as dit quelques chose ? "
+                            + "Je n'est pas bien entendu ta question. Tu as dit quelques chose ? " \
+                            + "<p/>"
 
         elif api_response_title == "Atlantide":
-            final_message = "<br>" + "<p style=\"color:#04fc6d;\">Vous : " + question + "<p/>" \
+            final_message = "<br><ul><p style=\"color:#04fc6d;\">Vous : " + question + "<p/>" \
                             + "<p style=\"color:#0417fc;\"> GrandPyBot : " \
-                            + "Je n'est pas bien entendu ta question. Tu veux parler de l'île cachée de l'Atlantide ? " \
+                              " Je n'est pas bien entendu ta question. Tu veux parler de l'île cachée de l'Atlantide ? " \
                             + random_message \
-                            + " J'ai l'adresse. Garde-la pour toi, elle est secrète : " + formated_address \
-                            + "<p/>" + extract + "<br>" + " "
+                            + " J'ai l'adresse. Garde-la pour toi, elle est secrète : " + formated_address + "<p/>" \
+                            + "<p style=\"color:#0417fc;\">" + extract + "<p/><ul/>"
 
-                # Print all message for the front
+            # Print all message for the front
         else:
-            final_message = "<br>" + "<p style=\"color:#04fc6d;\">Vous : " + question + "<p/>" \
-                + "<p style=\"color:#0417fc;\"> GrandPyBot : " + random_message \
-                + " Cette endroit se trouve à l'adresse : " + formated_address \
-                + "<p/>" + extract + "<br>" + " "
+            final_message = "<br><ul><p style=\"color:#04fc6d;\">Vous : " + question + "<p/>" \
+                            + "<p style=\"color:#0417fc;\">GrandPyBot : " + random_message \
+                            + "Cette endroit se trouve à l'adresse : " + formated_address + "<p/>" \
+                            + "<p style=\"color:#0417fc;\">" + extract + "<p/><ul/>"
 
         return jsonify({'question': final_message, 'imgUrlList1': imgUrlList1,
                         'imgUrlList2': imgUrlList2, 'imgUrlList3': imgUrlList3})
