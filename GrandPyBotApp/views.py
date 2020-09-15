@@ -63,8 +63,6 @@ def conversation():
         # Get google map images from API with coordinates
         api_google_map = TheGoogleMapParseCom()
         imgUrlList = api_google_map.get_image_from_api(request_coord)
-        print("request_coord: ", request_coord)
-        print("imgUrlList: ", imgUrlList)
 
         imgUrlList1 = imgUrlList[0]
         imgUrlList2 = imgUrlList[1]

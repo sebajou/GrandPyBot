@@ -1,5 +1,5 @@
 import pytest
-import GrandPyBotApp.functions.googleMapCoordinates as script
+from GrandPyBotApp.functions.googleMapCoordinates import Coordinates
 from GrandPyBotApp import app
 import json
 
@@ -82,39 +82,46 @@ class TestCoordinates:
    "status" : "OK"
 }
 
-    def test_get_coordinates(self):
+    def test_get_coordinates(self, monkeypatch):
 
         # Attribute useful for the test
         coord = self.coordinates
         titles = self.title
 
-        # Call the class Coordinates
-        getCoord = script.Coordinates()
+        # Mock the class Coordinates
+        def mock_get_coordinates(title):
+            return "45.382062, 6.721232"
+        monkeypatch.setattr('GrandPyBotApp.functions.googleMapCoordinates.Coordinates.get_coordinates', mock_get_coordinates)
 
         # Assert
-        assert getCoord.get_coordinates(titles) == coord
+        assert Coordinates.get_coordinates(titles) == coord
 
-    def test_get_coordinates_from_absurd_tittle(self):
+    def test_get_coordinates_from_absurd_tittle(self, monkeypatch):
 
         # Attribute useful for the test
         atlandide_coord = self.atlandide_coord
         absurd_title = self.absurd_title
 
-        # Call the class Coordinates
-        getCoord = script.Coordinates()
+        # Mock the class Coordinates
+        def mock_get_coordinates(title):
+            return "45.9996836, -73.9187669"
+        monkeypatch.setattr('GrandPyBotApp.functions.googleMapCoordinates.Coordinates.get_coordinates', mock_get_coordinates)
 
-        assert getCoord.get_coordinates(absurd_title) == atlandide_coord
+        assert Coordinates.get_coordinates(absurd_title) == atlandide_coord
 
-    def test_get_formatted_address(self):
+
+    def test_get_formatted_address(self, monkeypatch):
 
         # Attribute useful for the test
         data_coordinates =self.coordinates_api_json_results
         formated_address = self.formated_address
 
+        # Mock the class Coordinates
+        def mock_get_formatted_address(data_coordinates):
+            return '354-406 Avenue de Chasseforet, 73710 Pralognan-la-Vanoise, France'
+        monkeypatch.setattr('GrandPyBotApp.functions.googleMapCoordinates.Coordinates.get_formatted_address', mock_get_formatted_address)
 
-        # Call the class Coordinates
-        getCoord = script.Coordinates()
 
         # Obtain results from tested function
-        assert getCoord.get_formatted_address(data_coordinates) == formated_address
+        assert Coordinates.get_formatted_address(data_coordinates) == formated_address
 
