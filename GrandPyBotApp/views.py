@@ -92,3 +92,8 @@ def conversation():
 
         return jsonify({'question': final_message, 'imgUrlList1': imgUrlList1,
                         'imgUrlList2': imgUrlList2, 'imgUrlList3': imgUrlList3})
+
+
+if __name__ == "__main__":
+    app.run(debug=False)
+
