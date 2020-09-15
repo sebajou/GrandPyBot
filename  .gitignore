@@ -1,0 +1,5 @@
+config.py
+.idea/
+__pycache__/
+env/
+GrandPyBotApp/__pycache__/views.cpython-37.pyc
