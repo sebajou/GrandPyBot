@@ -88,13 +88,13 @@ def conversation():
         if api_response_title == "Empty request":
             final_message = "<br><ul><p style=\"color:#04fc6d;\">Vous : " + question + "<p/>" \
                             + "<p style=\"color:#0417fc;\"> GrandPyBot : " \
-                            + "Je n'est pas bien entendu ta question. Tu as dit quelques chose ? " \
+                            + "Je n'ai pas bien entendu ta question. Tu as dit quelque chose ? " \
                             + "<p/>"
 
         elif api_response_title == "Atlantide":
             final_message = "<br><ul><p style=\"color:#04fc6d;\">Vous : " + question + "<p/>" \
                             + "<p style=\"color:#0417fc;\"> GrandPyBot : " \
-                              " Je n'est pas bien entendu ta question. Tu veux parler de l'île cachée de l'Atlantide ? " \
+                              " Je n'ai pas bien entendu ta question. Tu veux parler de l'île cachée de l'Atlantide ? " \
                             + random_message \
                             + " J'ai l'adresse. Garde-la pour toi, elle est secrète : " + formated_address + "<p/>" \
                             + "<p style=\"color:#0417fc;\">" + extract + "<p/><ul/>"
@@ -103,7 +103,7 @@ def conversation():
         else:
             final_message = "<br><ul><p style=\"color:#04fc6d;\">Vous : " + question + "<p/>" \
                             + "<p style=\"color:#0417fc;\">GrandPyBot : " + random_message \
-                            + "Cette endroit se trouve à l'adresse : " + formated_address + "<p/>" \
+                            + "Cet endroit se trouve à l'adresse : " + formated_address + "<p/>" \
                             + "<p style=\"color:#0417fc;\">" + extract + "<p/><ul/>"
 
         return jsonify({'question': final_message, 'imgUrlList1': imgUrlList1,

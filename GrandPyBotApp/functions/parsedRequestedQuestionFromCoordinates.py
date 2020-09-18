@@ -26,7 +26,7 @@ class ParsedRequestedQuestionFromCoordinates:
             return json_title['results'][0]['address_components'][1]['long_name']
 
         except (UnboundLocalError, IndexError, KeyError):
-            return "Quelques part sur terre"
+            return "Quelque part sur terre"
 
     def get_parsed_requested_question_from_coordinates(self, data_coordinates):
 

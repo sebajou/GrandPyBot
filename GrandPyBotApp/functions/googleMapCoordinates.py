@@ -47,5 +47,5 @@ class Coordinates:
         try:
             return data_coordinates['results'][0]['formatted_address']
         except (UnboundLocalError, IndexError, KeyError):
-            return "Quelques part sur terre"
+            return "Quelque part sur terre"
 
