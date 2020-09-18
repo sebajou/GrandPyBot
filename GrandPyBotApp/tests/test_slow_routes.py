@@ -17,6 +17,8 @@ class TestRoutes:
         self.normal_to_post = "Salut GrandPy ! Est-ce que tu connais l'adresse d'OpenClassrooms ?"
         self.absurd_to_post = "dsqgrr(5éht"
         self.empty_to_post = ""
+        self.coordinates_to_post = "45.393503599999995, 6.7251974"
+        self.absurd_coordinates_to_post = "-96.393503599999995, 566.7251974"
 
     @staticmethod
     def test_view_home(client):
@@ -34,3 +36,12 @@ class TestRoutes:
         message_to_post = self.empty_to_post
         assert client.post('/conversation', data=dict(question=message_to_post)).status_code == 200
 
+    def test_view_coordinates(self, client, monkeypatch):
+        message_to_post = self.coordinates_to_post
+
+        assert client.post('/conversation', data=dict(question=message_to_post)).status_code == 200
+
+    def test_view_absurd_coordinates(self, client, monkeypatch):
+        message_to_post = self.absurd_coordinates_to_post
+
+        assert client.post('/conversation', data=dict(question=message_to_post)).status_code == 200

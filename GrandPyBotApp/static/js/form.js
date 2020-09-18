@@ -1,3 +1,19 @@
+var x = document.getElementById("questionInput");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  x.innerHTML = position.coords.latitude + ", " + position.coords.longitude;
+  document.getElementById("questionInput").value = x.innerHTML;
+}
+
+
 $('form').on('submit', function(event) {
     $.ajax({
         // Get data from back
@@ -38,3 +54,4 @@ $('form').on('submit', function(event) {
         });
     event.preventDefault();
     });
+

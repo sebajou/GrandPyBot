@@ -5,8 +5,10 @@ from GrandPyBotApp.functions.WikiMediaParseCom import TheWikiMediaParseCom
 from GrandPyBotApp.functions.googleMapCoordinates import Coordinates
 from GrandPyBotApp.functions.RandomMessage import TheRandomMessage
 from GrandPyBotApp.functions.GoogleMapParseCom import TheGoogleMapParseCom
+from GrandPyBotApp.functions.parsedRequestedQuestionFromCoordinates import ParsedRequestedQuestionFromCoordinates
 from config import *
 import json
+import re
 
 app = Flask(__name__)
 
@@ -30,12 +32,25 @@ def conversation():
         question = request.form["question"]
         print("La question : " + question)
 
-        # Parse the question
-        do_parser = Parser()
-        parsed = do_parser.parse_message_from_front(question)
+        # Control if question content coordinates
+        regexp = re.compile(r'^(-?\d+(\.\d+)?),\s*(-?\d+(\.\d+)?)$')
+        request_coord = ""
         parsed_requested_question = ""
-        for element in parsed:
-            parsed_requested_question = parsed_requested_question + " " + element
+        regex_not_catch = True
+        if regexp.search(question):
+            # Allow to obtain map from share location
+            request_coord = question
+            # Give to parsed_requested_question variable a title from share location
+            par_req_qu = ParsedRequestedQuestionFromCoordinates()
+            parsed_requested_question = par_req_qu.get_parsed_requested_question_from_coordinates(request_coord)
+            regex_not_catch = False
+
+        # Parse the question
+        if regex_not_catch:
+            do_parser = Parser()
+            parsed = do_parser.parse_message_from_front(question)
+            for element in parsed:
+                parsed_requested_question = parsed_requested_question + " " + element
 
         # Display a Random message
         random_class = TheRandomMessage()
@@ -43,7 +58,8 @@ def conversation():
 
         # Get coordinates from parsed_requested_question
         api_request_coord = Coordinates()
-        request_coord = api_request_coord.get_coordinates(parsed_requested_question)
+        if regex_not_catch:
+            request_coord = api_request_coord.get_coordinates(parsed_requested_question)
 
         # Request the API Wiki Media with the parsed element
         api_request = TheWikiMediaParseCom()
