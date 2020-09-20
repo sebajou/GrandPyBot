@@ -3,6 +3,7 @@ var x = document.getElementById("questionInput");
 function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition);
+    console.log("Hello world 1");
   } else {
     x.innerHTML = "Geolocation is not supported by this browser.";
   }
@@ -28,7 +29,7 @@ $('form').on('submit', function(event) {
     })
     // Do if AJAX done
     .done(function(data) {
-        console.log(data);
+        console.log("Hello AJAX done");
         // Hide loading gif
         $('#loading').hide();
         // Display data from back
@@ -45,7 +46,7 @@ $('form').on('submit', function(event) {
         // Display recorded data if record already exist
         if (sessionStorage.getItem("sessionSave")) {
             document.getElementById("memSession").innerHTML = sessionStorage.getItem("sessionSave");
-            console.log(sessionStorage.getItem("sessionSave"));
+            console.log("Hello Session storage");
         }
 
         // Record request and response

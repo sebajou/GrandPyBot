@@ -11,7 +11,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"></script>
     <link rel="stylesheet" href="../static/css/GrandPyBot_style.css" />
     <script src="{{ url_for('static', filename='js/form.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/getPosition.js') }}"></script>
   </head>
   <body>
     <div class="container">
@@ -35,7 +34,7 @@
                         <form>
                             <p>Votre question pour GrandPyBot:
                             <input type="text" id="questionInput" placeholder="votre question" >
-                            <input type='submit' onclick="$('#loading').show();">
+                            <input type='submit' id="submitQuestionInput" onclick="$('#loading').show();">
                             <button id ="find-me" onclick="getLocation()">Partage avec GrandPyBot ta position</button><br/>
                         </form>
                         <div id="loading" style="display:none;"><img src="../static/img/waiting_robot.gif" alt="" />Loading!</div>
