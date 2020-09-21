@@ -1,5 +1,4 @@
 import string
-import re
 import pickle
 
 
@@ -7,13 +6,14 @@ class Parser:
     """ This class parse message from front input from user and return it to API"""
 
     def __init__(self):
-        """Initial attribut for Paser"""
+        """Initial attribute for Parser"""
         with open('GrandPyBotApp/functions/fr_stop_word_data', 'rb') as fr_stop_word_file:
             my_unpickler = pickle.Unpickler(fr_stop_word_file)
             self.fr_stop_word = my_unpickler.load()
         # List of piece of word, for target french verb.
         self.list_pattern_beginning = ['part', 'all', 'veu', 'part', 'voul', 'voudr', 'ir']
-        self.list_pattern_end = ['ons', 'ez', 'ent', 'x', 't', 'ais', 'ai', 'ait', 'us', 'ut', 'ûmes', 'ûtes', 'urent', 'é', 'ir']
+        self.list_pattern_end = ['ons', 'ez', 'ent', 'x', 't', 'ais', 'ai', 'ait', 'us', 'ut',
+                                 'ûmes', 'ûtes', 'urent', 'é', 'ir']
 
     @staticmethod
     def format_message(message_from_front):
@@ -31,11 +31,10 @@ class Parser:
     def format_verb(self, message_from_front):
         """Format message from front user input by removing verb"""
         list_verb_pattern = []
-        for word in message_from_front:
-            for pattern_beginning in self.list_pattern_beginning:
-                for pattern_end in self.list_pattern_end:
-                    pattern = pattern_beginning + pattern_end
-                    list_verb_pattern.append(pattern)
+        for pattern_beginning in self.list_pattern_beginning:
+            for pattern_end in self.list_pattern_end:
+                pattern = pattern_beginning + pattern_end
+                list_verb_pattern.append(pattern)
 
         # Remove list_message_from_front from message_from_front
         list_message_from_front = [word for word in message_from_front if not word in list_verb_pattern]

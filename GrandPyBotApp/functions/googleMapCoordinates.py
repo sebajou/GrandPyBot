@@ -7,21 +7,20 @@ class Coordinates:
     @staticmethod
     def get_coordinates_from_api(title):
         """This function get coordinate from a given title with Google map API"""
-        # https://maps.googleapis.com/maps/api/geocode/json?address=Pralognan+la+Vanoise,+CA&key=GOOGLE_MAP_API_KEY_COORDINATES
-        URL = "https://maps.googleapis.com/maps/api/geocode/json?"
-        TITLES = title
-        PARAMS = {
-            "address": TITLES,
+        the_url = "https://maps.googleapis.com/maps/api/geocode/json?"
+        the_titles = title
+        the_params = {
+            "address": the_titles,
             "key": GOOGLE_MAP_API_KEY_COORDINATES
         }
-        data_coordinates = requests.get(url=URL, params=PARAMS)
+        data_coordinates = requests.get(url=the_url, params=the_params)
         data_coordinates = data_coordinates.json()
 
         return data_coordinates
 
     @staticmethod
     def parse_coordinates_from_api(data_coordinates):
-
+        """Parse data from API's json"""
         try:
             lat = data_coordinates['results'][0]['geometry']['location']['lat']
             lng = data_coordinates['results'][0]['geometry']['location']['lng']
@@ -36,7 +35,7 @@ class Coordinates:
         return coordinates
 
     def get_coordinates(self, title):
-
+        """Execude fonction of Coordinates class in the aim to obtain coordinates from a given title"""
         data_coordinates = self.get_coordinates_from_api(title)
         coordinates = self.parse_coordinates_from_api(data_coordinates)
 
@@ -44,8 +43,8 @@ class Coordinates:
 
     @staticmethod
     def get_formatted_address(data_coordinates):
+        """Extract formatted address from coordinates"""
         try:
             return data_coordinates['results'][0]['formatted_address']
         except (UnboundLocalError, IndexError, KeyError):
             return "Quelque part sur terre"
-

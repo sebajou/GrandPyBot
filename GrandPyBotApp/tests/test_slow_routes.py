@@ -36,12 +36,12 @@ class TestRoutes:
         message_to_post = self.empty_to_post
         assert client.post('/conversation', data=dict(question=message_to_post)).status_code == 200
 
-    def test_view_coordinates(self, client, monkeypatch):
+    def test_view_coordinates(self, client):
         message_to_post = self.coordinates_to_post
 
         assert client.post('/conversation', data=dict(question=message_to_post)).status_code == 200
 
-    def test_view_absurd_coordinates(self, client, monkeypatch):
+    def test_view_absurd_coordinates(self, client):
         message_to_post = self.absurd_coordinates_to_post
 
         assert client.post('/conversation', data=dict(question=message_to_post)).status_code == 200

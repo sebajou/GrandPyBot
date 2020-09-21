@@ -1,5 +1,6 @@
 var x = document.getElementById("questionInput");
 
+// Function for obtain the user's coordinates
 function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition);
@@ -8,7 +9,7 @@ function getLocation() {
     x.innerHTML = "Geolocation is not supported by this browser.";
   }
 }
-
+// Function wich allow to display user position coordinates inside questionInput field
 function showPosition(position) {
   x.innerHTML = position.coords.latitude + ", " + position.coords.longitude;
   document.getElementById("questionInput").value = x.innerHTML;

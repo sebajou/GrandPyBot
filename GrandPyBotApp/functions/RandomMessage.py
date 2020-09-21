@@ -2,11 +2,11 @@ import random
 
 
 class TheRandomMessage:
-    """Engine to randomly send sentence from GranPapy with Python back end."""
+    """Engine to randomly send sentence from GranPy Bot with Python back end."""
     @staticmethod
     def random_message():
 
-        # List of predeterminate messages.
+        # List of predetermined messages.
         message = ["A oui ! Je connais bien cet endroit. ",
                    "Je suis allé à cet endroit quand j’avais presque ton âge. ",
                    "C’est un très beau lieu. J’aimais y aller quand j’étais jeune. ",

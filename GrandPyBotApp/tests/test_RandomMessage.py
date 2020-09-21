@@ -1,5 +1,4 @@
 import GrandPyBotApp.functions.RandomMessage as Script
-import pytest
 
 
 class TestRandom:
