@@ -37,7 +37,7 @@ class Parser:
                 list_verb_pattern.append(pattern)
 
         # Remove list_message_from_front from message_from_front
-        list_message_from_front = [word for word in message_from_front if not word in list_verb_pattern]
+        list_message_from_front = [word for word in message_from_front if word not in list_verb_pattern]
 
         return list_message_from_front
 
@@ -50,6 +50,6 @@ class Parser:
         parse_message_of_front = self.format_verb(list_message_from_front)
 
         # Remove stopWord from parse_message_from_front
-        word = [word for word in parse_message_of_front if not word in self.fr_stop_word]
+        word = [word for word in parse_message_of_front if word not in self.fr_stop_word]
 
         return word

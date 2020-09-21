@@ -9,7 +9,7 @@ function getLocation() {
     x.innerHTML = "Geolocation is not supported by this browser.";
   }
 }
-// Function wich allow to display user position coordinates inside questionInput field
+// Function which allow to display user position coordinates inside questionInput field
 function showPosition(position) {
   x.innerHTML = position.coords.latitude + ", " + position.coords.longitude;
   document.getElementById("questionInput").value = x.innerHTML;

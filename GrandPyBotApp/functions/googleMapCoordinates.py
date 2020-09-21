@@ -3,7 +3,7 @@ from config import *
 
 
 class Coordinates:
-
+    """Obtain coordinates and formatted address from a given title"""
     @staticmethod
     def get_coordinates_from_api(title):
         """This function get coordinate from a given title with Google map API"""

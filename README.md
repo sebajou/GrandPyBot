@@ -1,18 +1,19 @@
 # GrandPyBot
 
-This conversational bot will give you description of a location and a map to go there from an address. 
+This conversational bot will give you description of a location, the address and a map to go there from an question or
+from coordinates share by the user. 
 This is a test driven project. 
 
-## Fonctionnalities
+## How to run 
+Create an environment then install the same requirements then in requirements.txt. 
+Go at the same directory level then run.py. 
+In your bash launch the command "python run.py". 
+Open the localhost in your favorite navigator. 
 
-### Static page for display
-Static HTML CSS page to display main information.
-
-### Dynamic page for display
-JavaScript / JQuery for modify body text with data query on back end.
+## Back End functionalities
 
 ### Parse, mother class for other parer
-#### => Class Parse
+#### => Class Parser
 This class parse message from front input from user and return it to API.
 This class do it in tree step: 
 * Step 1, format the message: lower the message, remove comma and dot and quotes, and put all word in a list. 
@@ -22,7 +23,7 @@ removed created verb from the list from step 1.
 The results is a list of key word. 
 
 ### Parser for Google Map and com with API 
-#### => Class GoogleMapParseCom
+#### => Class TheGoogleMapParseCom
 Parser for Google Map with Python back end. 
 Speak with Google Map API with Python back end and Json message.
 Inherit from Parse class: Parse message from front with the aim to do a list of key words use to interrogate the Google Map API. 
@@ -31,7 +32,7 @@ Transform this coordinates in string.
 Interrogate Google map API with this strong coordinates to obtain a static png map. 
 
 ### Parser for Media Wiki and com with API 
-#### => Class MediaWikiParseCom 
+#### => Class TheWikiMediaParseCom 
 Parser for Media Wiki with Python back end.
 Speak with Media Wiki API with Python back end and Json message.
 Inherit from Parse class: Parse message from front with the aim to do a list of key words use to interrogate the Media Wiki API. 
@@ -39,16 +40,29 @@ With a list of key word interrogate Wiki Media API to obtain a title correspondi
 
 
 ### Randomly sentence send
-#### => Class RandomMessage
-Engine to randomly send sentence from GranPapy with Python back end.
+#### => Class TheRandomMessage
+Engine to randomly send sentence from back end.
 
-### Parser of json message from Media Wiki API 
-#### => Class
+### Give Coordinates from titles  
+#### => Class Coordinates
+Obtain coordinates and formatted address from a given title.
 
-### Json from API parser
-#### => Class JsonParser
-On back end Parse Json from API Google Map and Media wiki.
+###  Give titles from coordinates
+#### => ParsedRequestedQuestionFromCoordinates
+Give a key word for obtain wikipedia resources and other from share coordinates.
 
-### Back end and Front end component for Ajax message
-#### => Class AjaxMessage
-Ajax for data exchange from server to front, POST.
+## Front End functionalities
+
+### home.html
+Simple home page with form field and two button: one submit button to send data from field to the back end. 
+One button to trig JavaScript function for obtain users position.
+The home page contain code for responsive application.  
+
+### form.js
+This JavaSript file contain tree main part: 
+* At the beginning of the file functions for obtain user position and display it in the field. 
+* jQuery selector and AJAX function to exchange json data with back end. 
+* Some function to store conversation data in memory, in session storage. 
+
+### GrandPyBot_style.css
+Classic css. 
